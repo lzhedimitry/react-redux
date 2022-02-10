@@ -36,3 +36,4 @@ networks:
 volumes:
    drf-backend:
    drf-react-react:
+   test
