@@ -28,6 +28,7 @@ pipeline {
             }
         }
         stage("docker push") {
+            docker.withRegistry('https://registry.hub.docker.com')
             steps {
                 echo " ============== start pushing image =================="
                 sh 'docker push naymtsu/react:v1'
