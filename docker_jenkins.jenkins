@@ -30,7 +30,6 @@ pipeline {
         stage("docker push") {
             steps {
                 echo " ============== start pushing image =================="
-                withCredentials(['https://hub.docker.com'])
                 sh 'docker push naymtsu/react:v1'
                 
             }
