@@ -23,14 +23,14 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('') {
-                	sh 'docker build -t naymtsu/react:v1 . '
+                	sh 'docker build -t nyamtsu/react:v1 . '
                 }
             }
         }
         stage("docker push") {
             steps {
                 echo " ============== start pushing image =================="
-                sh 'docker push naymtsu/react:v1'
+                sh 'docker push nyamtsu/react:v1'
                 
             }
         }
