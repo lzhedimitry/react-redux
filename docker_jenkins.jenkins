@@ -30,9 +30,8 @@ pipeline {
         stage("docker push") {
             steps {
                 echo " ============== start pushing image =================="
-                sh '''
-                docker push naymtsu/react:v1
-                '''
+                sh 'docker push naymtsu/react:v1'
+                
             }
         }
     }
