@@ -25,7 +25,7 @@ pipeline {
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
-                dir ('') {
+                dir ('react-redux') {
                 	sh 'docker build -t naymtsu/react:v1 . '
                 }
             }
