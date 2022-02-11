@@ -32,7 +32,7 @@ pipeline {
         stage("kubernetes deploy") {
             steps {
                 echo "kubernetes deploy"
-                withCredentials([kubeconfig(credentialsId: 'kubernetes')]) {
+                withCredentials([kubeconfigContent(credentialsId: 'kubernetes')]) {
                 dir ('') {
                     sh 'kubectl apply -f ./front.yaml'
                 }
