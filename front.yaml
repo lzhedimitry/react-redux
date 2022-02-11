@@ -2,12 +2,11 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: production-frontend
-  namespace: nyamtsu-namespace
   labels:
     app: front
 spec:
   containers:
     - name: production-frontend
-      image: nyamtsu/reactprod:latest
+      image: nyamtsu/react:v1
       ports:
         - containerPort: 80
