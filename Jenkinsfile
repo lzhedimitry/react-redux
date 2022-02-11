@@ -31,7 +31,7 @@ pipeline {
         }
         stage("kubernetes deploy") {
             environment {
-                credentialsId = 'kubernetes'
+                registryCredential = 'kubernetes'
             }
             steps {
                 echo "kubernetes deploy"
