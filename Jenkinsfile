@@ -30,16 +30,14 @@ pipeline {
             }
         }
         stage("kubernetes deploy") {
-            environment {
-                credentialsId = 'kubernetes'
-            }
             steps {
                 echo "kubernetes deploy"
+                withKubeConfig([credentialsId: 'kubernetes']){
                     dir ('') {
                         sh 'kubectl apply -f ./front.yaml'
                     }
+                }
             }
         }
     }
-}
 
