@@ -30,8 +30,7 @@ pipeline {
             }
         }
         stage("kubernetes deploy") {
-            withKubeConfig([credentialsId: 'kubernetes']){
-            }
+            withKubeConfig([credentialsId: 'kubernetes'])
             }
             steps {
                 echo "kubernetes deploy"
@@ -41,5 +40,4 @@ pipeline {
             }
         }
     }
-}
 
