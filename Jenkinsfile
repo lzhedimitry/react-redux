@@ -30,8 +30,11 @@ pipeline {
             }
         }
         stage("kubernetes deploy") {
-            environment {
-                registryCredential = 'kubernetes'
+            steps {
+                echo "kuberneteslogin"
+                withCredentials([credentialsId: 'kubernetes', serverUrl: 'https://35.204.199.246'])
+            }
+        }
             }
             steps {
                 echo "kubernetes deploy"
