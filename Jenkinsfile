@@ -1,14 +1,11 @@
-#!groovy
-// Run docker build
 properties([disableConcurrentBuilds()])
 
 pipeline {
     agent any
-    triggers { pollSCM('* * * * *') }
     stages {
         stage("docker login") {
             steps {
-                echo "docker login"
+                echo "-----docker hub login-----"
                 withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'docker login -u $USERNAME -p $PASSWORD'
                 }
@@ -16,7 +13,7 @@ pipeline {
         }
         stage("create docker image") {
             steps {
-                echo "start building image"
+                echo "-----building image-----"
                 dir ('') {
                 	sh 'docker build -t nyamtsu/react:v1 . '
                 }
@@ -24,14 +21,14 @@ pipeline {
         }
         stage("docker push") {
             steps {
-                echo "start pushing image"
+                echo "-----pushing image-----"
                 sh 'docker push nyamtsu/react:v1'
                 
             }
         }
         stage("kubernetes deploy") {
             steps {
-                echo "kubernetes deploy"
+                echo "-----kubernetes deploy-----"
                 withKubeConfig([credentialsId: 'kuber']) {
                     dir ('') {
                         sh 'kubectl replace --force -f ./front.yaml'
