@@ -34,7 +34,7 @@ pipeline {
                 echo "kubernetes deploy"
                 withKubeConfig([credentialsId: 'kuber']) {
                     dir ('') {
-                        sh 'kubectl apply -f ./front.yaml'
+                        sh 'kubectl replace --force -f ./front.yaml'
                     }
                 }
             }
