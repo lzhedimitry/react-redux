@@ -39,7 +39,7 @@ pipeline {
                 stage('delete docker image localy') {
                   steps {
                       echo "-----delete docker image localy-----"
-                        sh 'docker rmi nyamtsu/react'
+                        sh 'docker rmi nyamtsu/react:tagname'
             }
         }
     }
