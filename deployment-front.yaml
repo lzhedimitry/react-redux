@@ -21,7 +21,7 @@ spec:
         - containerPort: 80
         env:
         - name: REACT_APP_BACKEND_URL
-        value: http://nyamtsu.pp.ua/api
+          value: http://nyamtsu.pp.ua/api
         resources:
           requests:
             memory: "512Mi"
