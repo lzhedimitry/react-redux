@@ -15,14 +15,14 @@ pipeline {
             steps {
                 echo "-----building image-----"
                 dir ('') {
-                	sh 'docker build -t nyamtsu/react:latest . '
+                	sh 'docker build -t nyamtsu/react:10 . '
                 }
             }
         }
         stage("docker push") {
             steps {
                 echo "-----pushing image-----"
-                sh 'docker push nyamtsu/react:latest'
+                sh 'docker push nyamtsu/react:10'
                 
             }
         }
@@ -39,7 +39,7 @@ pipeline {
                 stage('delete docker image localy') {
                   steps {
                       echo "-----delete docker image localy-----"
-                        sh 'docker rmi nyamtsu/react:latest'
+                        sh 'docker rmi nyamtsu/react:10'
             }
         }
     }
