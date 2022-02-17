@@ -34,11 +34,7 @@ pipeline {
                 
             }
         }
-          stage('clone helm templates') {
-            steps {
-                sh ' git clone https://github.com/lzhedimitry/k8s-helm.git '
-            }
-        }
+
         stage('helm upgrade') {
             steps {
                 withKubeConfig(credentialsId: 'kuber', serverUrl: '') {
