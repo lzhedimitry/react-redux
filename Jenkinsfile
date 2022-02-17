@@ -31,9 +31,15 @@ pipeline {
                 echo "-----kubernetes deploy-----"
                 withKubeConfig([credentialsId: 'kuber']) {
                     dir ('') {
-                        sh 'kubectl replace --force -f ./front.yaml'
+                        sh 'kubectl replace --force -f ./deployment-front.yaml'
                     }
                 }
+            }
+        }
+                stage('delete docker image localy') {
+                  steps {
+                      echo "-----delete docker image localy-----"
+                        sh 'docker rmi nyamtsu/react:v1'
             }
         }
     }
