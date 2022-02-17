@@ -1,0 +1,47 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: production-frontend
+  labels:
+    app: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+      - name: production-frontend
+        image: nyamtsu/reactprod:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "125m"
+          limits:
+            memory: "512Mi"
+            cpu: "125m"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: production-frontend-autoscaling
+  labels:
+    app: front
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: front
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
