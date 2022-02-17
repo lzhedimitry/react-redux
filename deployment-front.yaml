@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: production-frontend
-        image: nyamtsu/react:v10
+        image: nyamtsu/react:v111
         ports:
         - containerPort: 80
         env:
