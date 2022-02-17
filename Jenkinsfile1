@@ -34,13 +34,19 @@ pipeline {
                 
             }
         }
-        stage("kubernetes deploy") {
+          stage('clone helm templates') {
             steps {
-                echo "-----kubernetes deploy-----"
-                withKubeConfig([credentialsId: 'kuber']) {
-                    dir ('') {
-                        sh 'kubectl replace --force -f ./deployment-front.yaml'
-                    }
+                sh ' git clone https://github.com/lzhedimitry/k8s-helm.git '
+            }
+        }
+        stage('helm upgrade') {
+            steps {
+                withKubeConfig(credentialsId: 'kuber', serverUrl: '') {
+                    
+                    sh '''
+                        cd k8s-helm
+                        helm upgrade --install app --set container.frontendImage=nyamtsu/react:v${BUILD_NUMBER} ./
+                    '''
                 }
             }
         }
