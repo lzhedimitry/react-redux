@@ -41,7 +41,7 @@ pipeline {
                     
                     sh '''
                         cd k8s-helm
-                        helm upgrade --install --set container.frontendImage=nyamtsu/react:v${BUILD_NUMBER} ./
+                        helm upgrade --install default --set container.frontendImage=nyamtsu/react:v${BUILD_NUMBER} ./
                     '''
                 }
             }
