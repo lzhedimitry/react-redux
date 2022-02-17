@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo "-----building image-----"
                 dir ('') {
-                	sh 'docker build -t nyamtsu/react:111 . '
+                	sh 'docker build -t nyamtsu/react:v111 . '
                 }
             }
         }
