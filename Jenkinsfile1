@@ -36,13 +36,6 @@ pipeline {
             }
         }
         
-        stage('clone helm templates') {
-            steps {
-                echo "-----clone helm templates-----"
-                    sh ' git clone https://github.com/lzhedimitry/k8s-helm.git '
-            }
-        }
-        
         stage('helm upgrade') {
             steps {
                 echo "-----update deployment-----"
@@ -60,13 +53,6 @@ pipeline {
             steps {
                 echo "-----delete docker image localy-----"
                     sh 'docker rmi nyamtsu/react:v${BUILD_NUMBER}'
-            }
-        }
-    
-        stage('delete helm templates') {
-            steps {
-                echo "-----delete helm templates-----"
-                    sh 'rmdir k8s-helm'
             }
         }
     }
