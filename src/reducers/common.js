@@ -18,7 +18,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'app-update',
+  appName: 'JENKINS',
   token: null,
   viewChangeCounter: 0
 };
