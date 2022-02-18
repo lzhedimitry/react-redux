@@ -56,11 +56,18 @@ pipeline {
             }
         }
         
-        stage('delete docker image localy') {
+                stage('delete docker image localy') {
             steps {
                 echo "-----delete docker image localy-----"
                     sh 'docker rmi nyamtsu/react:v${BUILD_NUMBER}'
             }
         }
+    
+        stage('delete helm templates') {
+            steps {
+                echo "-----delete helm templates-----"
+                    sh 'rmdir k8s-helm'
+            }
+        }
     }
-}
+}  
