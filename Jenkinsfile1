@@ -12,6 +12,7 @@ pipeline {
                 }
             }
         }
+        
         stage("create docker image") {
             steps {
                 // script{
@@ -27,17 +28,25 @@ pipeline {
                 }
             }
         }
+        
         stage("docker push") {
             steps {
                 echo "-----pushing image-----"
-                sh 'docker push nyamtsu/react:v${BUILD_NUMBER}'
-                
+                    sh 'docker push nyamtsu/react:v${BUILD_NUMBER}'  
             }
         }
-
+        
+        stage('clone helm templates') {
+            steps {
+                echo "-----clone helm templates-----"
+                    sh ' git clone https://github.com/lzhedimitry/k8s-helm.git '
+            }
+        }
+        
         stage('helm upgrade') {
             steps {
-                withKubeConfig(credentialsId: 'kuber', serverUrl: '') {
+                echo "-----update deployment-----"
+                    withKubeConfig(credentialsId: 'kuber', serverUrl: '') {
                     
                     sh '''
                         cd k8s-helm
@@ -46,10 +55,11 @@ pipeline {
                 }
             }
         }
-                stage('delete docker image localy') {
-                  steps {
-                      echo "-----delete docker image localy-----"
-                        sh 'docker rmi nyamtsu/react:v${BUILD_NUMBER}'
+        
+        stage('delete docker image localy') {
+            steps {
+                echo "-----delete docker image localy-----"
+                    sh 'docker rmi nyamtsu/react:v${BUILD_NUMBER}'
             }
         }
     }
